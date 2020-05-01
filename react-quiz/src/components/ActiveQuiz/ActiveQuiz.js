@@ -8,9 +8,11 @@ const ActiveQuiz = props => {
     return (
         <div className={classes.ActiveQuiz}>
             <div className={classes.Question}>
+
                 <Title styleTitle={classes.Title}>Question</Title>
 
                 <AnswerList/>
+
             </div>
         </div>
     );

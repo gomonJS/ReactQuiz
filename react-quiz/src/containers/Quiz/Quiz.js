@@ -45,6 +45,7 @@ export default class Quiz extends React.Component {
                             <FinishedQuiz
                                 quiz={this.state.quiz}
                                 results={this.state.results}
+                                onRetryButtonHandler={this.onRetryButtonHandler}
                             /> :
                             <ActiveQuiz
                                 answers={this.state.quiz[this.state.activeQuiz].answers}
@@ -106,4 +107,12 @@ export default class Quiz extends React.Component {
 
     isFinished = () => this.state.activeQuiz + 1 === this.state.quiz.length;
 
+    onRetryButtonHandler = () => {
+        this.setState({
+            results: {},
+            isFinished: false,
+            answerState: null,
+            activeQuiz: 0,
+        });
+    }
 }

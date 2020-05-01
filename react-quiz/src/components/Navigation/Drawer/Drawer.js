@@ -2,9 +2,12 @@ import React from 'react';
 import classes from './Drawer.module.css';
 import Fragment from "../../UI/Fragment/Fragment";
 import Backdrop from "../../UI/Backdrop/Backdrop";
+import {NavLink} from "react-router-dom";
 
 const linksNav = [
-    1, 2, 3
+    {to: '/', label: 'Список тестов', exact: true},
+    {to: '/quiz-creator', label: 'Добавить тест', exact: false},
+    {to: '/auth', label: 'Авторизация', exact: false},
 ];
 
 export default class Drawer extends React.Component {
@@ -14,11 +17,14 @@ export default class Drawer extends React.Component {
 
             return (
                 <li key={index}>
-                    <a
+                    <NavLink
                         onClick={this.props.onMenuClose}
+                        to={link.to}
+                        exact={link.exact}
+                        activeClassName={classes.active}
                     >
-                        {link} - Link
-                    </a>
+                        {link.label}
+                    </NavLink>
                 </li>
             );
         })

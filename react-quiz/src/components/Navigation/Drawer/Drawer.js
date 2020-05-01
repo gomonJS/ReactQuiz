@@ -1,5 +1,7 @@
 import React from 'react';
 import classes from './Drawer.module.css';
+import Fragment from "../../UI/Fragment/Fragment";
+import Backdrop from "../../UI/Backdrop/Backdrop";
 
 const linksNav = [
     1, 2, 3
@@ -31,11 +33,14 @@ export default class Drawer extends React.Component {
         if (!this.props.isOpen) cls.push(classes.close);
 
         return (
-            <nav className={cls.join(' ')}>
-                <ul>
-                    {this.onRenderLinksNav()}
-                </ul>
-            </nav>
+            <Fragment>
+                <nav className={cls.join(' ')}>
+                    <ul>
+                        {this.onRenderLinksNav()}
+                    </ul>
+                </nav>
+                {this.props.isOpen ? <Backdrop onClick={this.props.onMenuClose} /> : null}
+            </Fragment>
         );
     }
 }

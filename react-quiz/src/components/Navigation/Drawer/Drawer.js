@@ -5,7 +5,7 @@ import Backdrop from "../../UI/Backdrop/Backdrop";
 
 const linksNav = [
     1, 2, 3
-]
+];
 
 export default class Drawer extends React.Component {
 

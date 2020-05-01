@@ -21,7 +21,7 @@ const Input = props => {
 
             <input
                 id={htmlFor}
-                type="text"
+                type={inputType}
                 value={props.value}
                 onChange={props.onChange}
             />

@@ -1,11 +1,14 @@
 import React from 'react';
 import classes from './Quiz.module.css';
 import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
+import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
 
 export default class Quiz extends React.Component {
 
     state = {
 
+        results: {},
+        isFinished: false,
         answerState: null,
         activeQuiz: 0,
         quiz: [
@@ -37,14 +40,21 @@ export default class Quiz extends React.Component {
             <div className={classes.Quiz}>
                 <div className={classes.QuizWrapper}>
 
-                    <ActiveQuiz
-                        answers={this.state.quiz[this.state.activeQuiz].answers}
-                        question={this.state.quiz[this.state.activeQuiz].question}
-                        activeQuiz={this.state.activeQuiz + 1}
-                        quizLength={this.state.quiz.length}
-                        onAnswerClick={this.onAnswerClickHandler}
-                        answerState={this.state.answerState}
-                    />
+                    {
+                        this.state.isFinished ?
+                            <FinishedQuiz
+                                quiz={this.state.quiz}
+                                results={this.state.results}
+                            /> :
+                            <ActiveQuiz
+                                answers={this.state.quiz[this.state.activeQuiz].answers}
+                                question={this.state.quiz[this.state.activeQuiz].question}
+                                activeQuiz={this.state.activeQuiz + 1}
+                                quizLength={this.state.quiz.length}
+                                onAnswerClick={this.onAnswerClickHandler}
+                                answerState={this.state.answerState}
+                            />
+                    }
 
                 </div>
             </div>
@@ -59,27 +69,37 @@ export default class Quiz extends React.Component {
         }
 
         const question = this.state.quiz[this.state.activeQuiz];
+        const results = this.state.results;
 
         if (question.answerRightId === answerId) {
 
+            if (!results[question.id]) results[question.id] = 'success';
+
             this.setState({
-                answerState: {[answerId]: 'success'}
+                answerState: {[answerId]: 'success'},
+                results: results
             });
 
             const timer = window.setTimeout(() => {
 
                 if (this.isFinished()) {
-                    console.log('Finished!');
+                    this.setState({
+                        isFinished: true
+                    });
                 } else {
                     this.setState({
-                        activeQuiz: this.state.activeQuiz + 1
+                        activeQuiz: this.state.activeQuiz + 1,
+                        answerState: null
                     });
                 }
                 window.clearTimeout(timer);
             }, 900);
         } else {
+            results[question.id] = 'error';
+
             this.setState({
-                answerState: {[answerId]: 'error'}
+                answerState: {[answerId]: 'error'},
+                results: results
             });
         }
     }

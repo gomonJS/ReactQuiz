@@ -3,10 +3,16 @@ import classes from './AnswerItem.module.css';
 
 const AnswerItem = props => {
 
+    const cls = [
+        classes.AnswerItem
+    ];
+
+    if (props.answerState) cls.push(classes[props.answerState]);
+
     return (
         <li
             onClick={() => props.onAnswerClick(props.answer.id)}
-            className={classes.AnswerItem}>
+            className={cls.join(' ')}>
             {props.answer.text}
         </li>
     );

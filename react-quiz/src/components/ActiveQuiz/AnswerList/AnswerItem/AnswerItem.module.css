@@ -1,0 +1,26 @@
+.AnswerItem {
+    padding: 12px 15px;
+    border: 1px solid #686767;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background-color .1s ease-in-out .1s;
+}
+
+.AnswerItem:hover {
+    background-color: rgba(166, 184, 232, 0.45);
+}
+
+.AnswerItem:last-child {
+    margin-bottom: 0;
+}
+
+.AnswerItem.success {
+    background-color: green;
+    color: #ffffff;
+}
+
+.AnswerItem.error {
+    background-color: tomato;
+    color: #ffffff;
+}

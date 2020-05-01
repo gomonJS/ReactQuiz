@@ -1,0 +1,26 @@
+.ActiveQuiz {
+    padding: 20px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #535050;
+    font-size: 17px;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 2px rgba(0,0,0,.45);
+}
+
+.Question {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.Title {
+    color: #535050!important;
+    text-shadow: none!important;
+    margin-left: 0!important;
+    display: block;
+    width: 100%;
+    border-bottom: 2px solid #eaeaea;
+    line-height: 1.8;
+}

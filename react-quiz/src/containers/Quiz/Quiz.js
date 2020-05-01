@@ -6,6 +6,8 @@ export default class Quiz extends React.Component {
 
     state = {
 
+        answerState: null,
+        activeQuiz: 0,
         quiz: [
             {
                 id: 1,
@@ -35,10 +37,48 @@ export default class Quiz extends React.Component {
             <div className={classes.Quiz}>
                 <div className={classes.QuizWrapper}>
 
-                    <ActiveQuiz/>
+                    <ActiveQuiz
+                        answers={this.state.quiz[this.state.activeQuiz].answers}
+                        question={this.state.quiz[this.state.activeQuiz].question}
+                        activeQuiz={this.state.activeQuiz + 1}
+                        quizLength={this.state.quiz.length}
+                        onAnswerClick={this.onAnswerClickHandler}
+                        answerState={this.state.answerState}
+                    />
 
                 </div>
             </div>
         );
     }
+
+    onAnswerClickHandler = answerId => {
+
+        const question = this.state.quiz[this.state.activeQuiz];
+
+        if (question.answerRightId === answerId) {
+
+            this.setState({
+                answerState: {[answerId]: 'success'}
+            });
+
+            const timer = window.setTimeout(() => {
+
+                if (this.isFinished()) {
+                    console.log('Finished!');
+                } else {
+                    this.setState({
+                        activeQuiz: this.state.activeQuiz + 1
+                    });
+                }
+                window.clearTimeout(timer);
+            }, 900);
+        } else {
+            this.setState({
+                answerState: {[answerId]: 'error'}
+            });
+        }
+    }
+
+    isFinished = () => this.state.activeQuiz + 1 === this.state.quiz.length;
+
 }

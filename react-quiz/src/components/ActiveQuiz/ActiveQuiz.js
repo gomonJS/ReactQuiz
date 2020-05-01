@@ -9,9 +9,15 @@ const ActiveQuiz = props => {
         <div className={classes.ActiveQuiz}>
             <div className={classes.Question}>
 
-                <Title styleTitle={classes.Title}>Question</Title>
+                <Title styleTitle={classes.Title}>{props.question}</Title>
 
-                <AnswerList/>
+                <span>Question id: {props.activeQuiz}</span>
+                <small>{props.activeQuiz} from {props.quizLength}</small>
+
+                <AnswerList
+                    answers={props.answers}
+                    onAnswerClick={props.onAnswerClick}
+                />
 
             </div>
         </div>
